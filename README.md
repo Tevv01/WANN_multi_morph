@@ -1,33 +1,13 @@
-<p align="center">
-  <img width="100%" src="https://media.giphy.com/media/Q7IjOrLxlydlyb2kZL/giphy.gif">
-</p>
 
-# Weight Agnostic Neural Networks
+# Weight Agnostic Neural Networks on changing morphologies
 
-Code to reproduce and extend the experiments in ['Weight Agnostic Neural Networks'](https://weightagnostic.github.io/) by Adam Gaier and David Ha. 
 
-This repository is split into 4 parts:
+This code is extended off of ['Weight Agnostic Neural Networks'](https://weightagnostic.github.io/) by Adam Gaier and David Ha, and built to run expirements for my masters thesis at UiO to study how WANN respond to changing morphologies.
+This is done using [Evogym](https://github.com/EvolutionGym/evogym) for environment and random generation of morphologies.
 
-* [WANN](WANN): Self-contained code for replicating the experiments in the paper. If you just want to look at the details of the implementation this is the code for you.
 
-* [prettyNEAT](prettyNEAT): A general implementation of the NEAT algorithm -- used as an inspiration and departure point for WANNs. Performs simultaneous weight and topology optimization. If you want to do your own unrelated neuroevolution experiments with numpy and OpenAI Gym this is the code for you.
 
-* [prettyNeatWann](prettyNeatWann): WANNs implemented as a fork of prettyNEAT -- inherits methods and structures from prettyNEAT. If you want to heavily modify or do extensive experiments with WANNs this is the code for you.
-
-* [WANNTool](WANNTool): If you want to fine tune the weights of an existing WANN and test their performance over many trials, this is the code for you.
-
----
-
-### Using the VAE Racer environment 
-
-The pretrained VAE used in the VAERacer experiments is about 20MB, so rather than include it in every folder we put a single copy in the base directory. To use it copy the contents of `vae` into the root directory, e.g. 
-
-`cp -r vae WANN/`
-
----
-
-### Citation
-For attribution in academic contexts, please cite this work as
+The citation for the original paper and source code is given below
 
 ```
 @article{wann2019,
@@ -39,7 +19,3 @@ For attribution in academic contexts, please cite this work as
   year   = {2019}  
 }
 ```
-
-## Disclaimer
-
-This is not an official Google product.
