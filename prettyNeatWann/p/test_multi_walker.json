@@ -1,0 +1,10 @@
+{
+    "task": "evogym_walker",
+    "alg_nReps": 1,
+    "maxGen": 10,
+    "popSize": 16,
+    "prob_initEnable": 0.25,
+    "select_tournSize": 4,
+    "save_mod": 2,
+    "bestReps": 1
+}
