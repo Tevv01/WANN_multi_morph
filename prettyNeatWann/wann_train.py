@@ -21,7 +21,7 @@ from domain.evogym_walker import SimpleWalkerEnvClass
 import gymnasium as gym
 from domain.make_env import generate_morphs
 
-morphologies, connections = generate_morphs(num_morphs=20, size=5)
+morphologies, connections = generate_morphs(num_morphs=5, size=5)
 
 # -- Run NEAT ------------------------------------------------------------ -- #
 def master(): 
@@ -274,7 +274,7 @@ if __name__ == "__main__":
    help='file name for result output', default='test')
   
   parser.add_argument('-n', '--num_worker', type=int,\
-   help='number of cores to use', default=1)
+   help='number of cores to use', default=4)
 
   args = parser.parse_args()
 

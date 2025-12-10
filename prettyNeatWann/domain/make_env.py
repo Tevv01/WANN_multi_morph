@@ -67,16 +67,12 @@ def make_env(env_name, seed=-1, render_mode=False):
       env.t_limit = 200
 
 
-  # -- EVOGYM ENVIRONMENTS ------------------------------------------------- -- #
+  # -- EVOGYM WALKER ------------------------------------------------- -- #
   elif env_name in evogym_envs:
     if env_name == "Walker-v0":
         morphologies, connections = generate_morphs(num_morphs=5, size=5)
         from domain.evogym_walker import SimpleWalkerEnvClass
-<<<<<<< HEAD
         env = SimpleWalkerEnvClass(bodies=morphologies, connections=connections, render_mode=None)
-=======
-        env = SimpleWalkerEnvClass(bodies=morphologies, connections=connections, render_mode="Human")
->>>>>>> 708797c8ac15c90cf8f542126db46d5c06547a75
 
 
   # -- Other  -------------------------------------------------------- -- #
