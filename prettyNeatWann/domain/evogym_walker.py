@@ -107,7 +107,11 @@ class SimpleWalkerEnvClass(EvoGymBase):
 
     def reset(self, seed: Optional[int] = None, options: Optional[Dict[str, Any]] = None) -> Tuple[np.ndarray, Dict[str, Any]]:
         """Reset environment and optionally switch morphology"""
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> 708797c8ac15c90cf8f542126db46d5c06547a75
         # Reset base sim first 
         super().reset(seed=seed, options=options)
         
@@ -129,9 +133,15 @@ class SimpleWalkerEnvClass(EvoGymBase):
 
         return obs
 
+<<<<<<< HEAD
     
     def set_morphology(self):
         """Switch to a different morphology"""
+=======
+    def set_morphology(self):
+        """Switch to a different morphology"""
+
+>>>>>>> 708797c8ac15c90cf8f542126db46d5c06547a75
         morph_idx = random.randrange(0, len(self.bodies) - 1)
 
         print(f'Morph idx shuffled to: {morph_idx}')

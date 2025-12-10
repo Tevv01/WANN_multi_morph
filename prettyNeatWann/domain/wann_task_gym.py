@@ -94,6 +94,7 @@ class WannGymTask(GymTask):
     reward = np.empty((nRep,nVals))
     for iRep in range(nRep):
 
+<<<<<<< HEAD
       try:
         if issubclass(type(self.env), EvoGymBase):
           morph_idx = random.randint(0, len(self.morphologies) - 1)
@@ -101,9 +102,16 @@ class WannGymTask(GymTask):
           self.env = SimpleWalkerEnvClass(body=self.morphologies[morph_idx], connections=self.connections[morph_idx], render_mode=None)
       except:
         pass
+=======
+      print(f'Rep: {iRep}')
+      # Every repetition i shuffle the morphology for the environment.
+      if callable(getattr(self.env, 'set_morphology', None)):
+          self.env.set_morphology()
+>>>>>>> 708797c8ac15c90cf8f542126db46d5c06547a75
 
       for iVal in range(nVals):
         wMat = self.setWeights(wVec,wVals[iVal])
+
         if seed == -1:
           reward[iRep,iVal] = self.testInd(wMat, aVec, seed=seed,view=view)
         else:

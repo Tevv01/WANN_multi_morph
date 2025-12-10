@@ -30,7 +30,11 @@ class GymTask():
     self.nReps = nReps
     self.maxEpisodeLength = game.max_episode_length
     self.actSelect = game.actionSelect
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 708797c8ac15c90cf8f542126db46d5c06547a75
     if not paramOnly:
       self.env = make_env(game.env_name)
       # If the environment exposes observation/action spaces, prefer their sizes
@@ -95,7 +99,9 @@ class GymTask():
     random.seed(seed)
     np.random.seed(seed)
     
-    ## Vetle - Handling TypeError to allow for newer gym-tasks (where seed is given on reset), and older, where seed is set seperate.
+    ## Handling TypeError to allow for newer gym-tasks (where seed is given on reset), and older, where seed is set seperate.
+
+    
     try:
       state, info = self.env.reset(seed=seed)
     
