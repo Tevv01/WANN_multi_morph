@@ -6,6 +6,7 @@ from evogym.envs import register
 from typing import Optional, Dict, Any, Tuple
 import numpy as np
 import os
+import random
 
 
 class SimpleWalkerEnvClass(EvoGymBase):
@@ -102,10 +103,7 @@ class SimpleWalkerEnvClass(EvoGymBase):
 
     def reset(self, seed: Optional[int] = None, options: Optional[Dict[str, Any]] = None) -> Tuple[np.ndarray, Dict[str, Any]]:
         """Reset environment and optionally switch morphology"""
-        # Handle morphology switching
-        if options and 'morph_index' in options:
-            self.set_morphology(options['morph_index'])
-        
+
         # Reset base sim first 
         super().reset(seed=seed, options=options)
         
@@ -121,10 +119,12 @@ class SimpleWalkerEnvClass(EvoGymBase):
         ))
         return obs
 
-    def set_morphology(self, morph_idx: int):
+    def set_morphology(self):
         """Switch to a different morphology"""
-        if morph_idx >= len(self.bodies) or morph_idx < 0:
-            raise ValueError(f"Morphology index {morph_idx} out of range [0, {len(self.bodies)-1}]")
+
+        morph_idx = random.randrange(0, len(self.bodies) - 1)
+
+        print(f'Morph idx shuffled to: {morph_idx}')
             
         if morph_idx != self.current_morph_idx:
             self.current_morph_idx = morph_idx

@@ -82,8 +82,15 @@ class WannGymTask(GymTask):
     # Get reward from 'reps' rollouts -- test population on same seeds
     reward = np.empty((nRep,nVals))
     for iRep in range(nRep):
+
+      print(f'Rep: {iRep}')
+      # Every repetition i shuffle the morphology for the environment.
+      if callable(getattr(self.env, 'set_morphology', None)):
+          self.env.set_morphology()
+
       for iVal in range(nVals):
         wMat = self.setWeights(wVec,wVals[iVal])
+
         if seed == -1:
           reward[iRep,iVal] = self.testInd(wMat, aVec, seed=seed,view=view)
         else:
