@@ -183,7 +183,7 @@ games['bullet_ant'] = bullet_ant
 evogym_walker = Game(env_name="Walker-v0",
   actionSelect='all', # all, soft, hard
   input_size=100,
-  output_size=10,  # Maximum number of possible actuators
+  output_size=20,  # Maximum number of possible actuators
   time_factor=0,
   layers=[],
   i_act=np.full(74,1),

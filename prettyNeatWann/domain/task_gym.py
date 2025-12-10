@@ -30,6 +30,7 @@ class GymTask():
     self.nReps = nReps
     self.maxEpisodeLength = game.max_episode_length
     self.actSelect = game.actionSelect
+    
     if not paramOnly:
       self.env = make_env(game.env_name)
       # If the environment exposes observation/action spaces, prefer their sizes

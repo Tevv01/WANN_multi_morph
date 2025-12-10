@@ -4,12 +4,15 @@ import sys
 from domain.make_env import make_env
 from domain.task_gym import GymTask
 from neat_src import *
+from domain.evogym_walker import SimpleWalkerEnvClass
+from evogym.envs import EvoGymBase
+from domain.make_env import generate_morphs
 
 
 class WannGymTask(GymTask):
   """Problem domain to be solved by neural network. Uses OpenAI Gym patterns.
   """ 
-  def __init__(self, game, paramOnly=False, nReps=1): 
+  def __init__(self, game, paramOnly=False, nReps=1, morphs = None, conns = None): # , morphs = None, conns = None 
     """Initializes task environment
   
     Args:
@@ -21,6 +24,14 @@ class WannGymTask(GymTask):
     """
 
     GymTask.__init__(self, game, paramOnly, nReps)
+
+    if morphs:
+      self.morphologies = morphs
+    if conns:
+      self.connections = conns
+
+    #self.morphologies, self.connections = generate_morphs(num_morphs=5, size=5)
+
 
 
 # -- 'Weight Agnostic Network' evaluation -------------------------------- -- #
@@ -82,6 +93,15 @@ class WannGymTask(GymTask):
     # Get reward from 'reps' rollouts -- test population on same seeds
     reward = np.empty((nRep,nVals))
     for iRep in range(nRep):
+
+      try:
+        if issubclass(type(self.env), EvoGymBase):
+          morph_idx = random.randint(0, len(self.morphologies) - 1)
+          print(f"Switching to morph_idx: {morph_idx}")
+          self.env = SimpleWalkerEnvClass(body=self.morphologies[morph_idx], connections=self.connections[morph_idx], render_mode=None)
+      except:
+        pass
+
       for iVal in range(nVals):
         wMat = self.setWeights(wVec,wVals[iVal])
         if seed == -1:

@@ -19,6 +19,9 @@ from domain import *   # Task environments
 from domain.wann_task_gym_multi import WannGymTaskMultiMorph
 from domain.evogym_walker import SimpleWalkerEnvClass
 import gymnasium as gym
+from domain.make_env import generate_morphs
+
+morphologies, connections = generate_morphs(num_morphs=20, size=5)
 
 # -- Run NEAT ------------------------------------------------------------ -- #
 def master(): 
@@ -182,7 +185,7 @@ def slave():
     result - (float)    - fitness value of network
   """
   global hyp  
-  task = WannGymTask(games[hyp['task']], nReps=hyp['alg_nReps'])
+  task = WannGymTask(games[hyp['task']], nReps=hyp['alg_nReps'], morphs = morphologies, conns = connections)
 
   # Evaluate any weight vectors sent this way
   while True:

@@ -6,6 +6,7 @@ from evogym.envs import register
 from typing import Optional, Dict, Any, Tuple
 import numpy as np
 import os
+import random
 
 
 class SimpleWalkerEnvClass(EvoGymBase):
@@ -36,6 +37,9 @@ class SimpleWalkerEnvClass(EvoGymBase):
         self._render_mode = render_mode
         self._render_options = render_options
         
+        # Forced obs size so the network gets the right dims in
+        self.FIXED_OBS_SIZE = 66
+        self.FIXED_ACTION_SIZE = 20
 
         # Create world template first
         world_json = os.path.join(os.path.dirname(__file__), 'world_data', 'simple_walker_env.json')
@@ -48,13 +52,9 @@ class SimpleWalkerEnvClass(EvoGymBase):
         # Initialize base class with prepared world
         super().__init__(world=world, render_mode=render_mode, render_options=render_options)
             
-        # Get initial sizes from environment
-        state = self.reset()  # This will initialize the sim
-        num_actuators = len(self.get_actuator_indices('robot'))
-        obs_size = state[0].shape[0] if isinstance(state, tuple) else state.shape[0]
 
-        self.action_space = spaces.Box(low= 0.6, high=1.6, shape=(num_actuators,), dtype=float)
-        self.observation_space = spaces.Box(low=-100.0, high=100.0, shape=(obs_size,), dtype=float)
+        self.action_space = spaces.Box(low=0.6, high=1.6, shape=(self.FIXED_ACTION_SIZE,), dtype=float)
+        self.observation_space = spaces.Box(low=-100.0, high=100.0, shape=(self.FIXED_OBS_SIZE,), dtype=float)
 
         # set viewer to track objects
         self.default_viewer.track_objects('robot')
@@ -92,19 +92,21 @@ class SimpleWalkerEnvClass(EvoGymBase):
             reward += 1.0
 
         # observation
-        obs = np.concatenate((
+        raw_obs = np.concatenate((
             self.get_vel_com_obs("robot"),
             self.get_relative_pos_obs("robot"),
             ))
+        
+        if raw_obs.shape[0] < self.FIXED_OBS_SIZE:
+            obs = np.pad(raw_obs, (0, self.FIXED_OBS_SIZE - raw_obs.shape[0]))
+        else:
+            obs = raw_obs[:self.FIXED_OBS_SIZE]
 
         # observation, reward, has simulation met termination conditions, truncated, debugging info
         return obs, reward, done, False, {}
 
     def reset(self, seed: Optional[int] = None, options: Optional[Dict[str, Any]] = None) -> Tuple[np.ndarray, Dict[str, Any]]:
         """Reset environment and optionally switch morphology"""
-        # Handle morphology switching
-        if options and 'morph_index' in options:
-            self.set_morphology(options['morph_index'])
         
         # Reset base sim first 
         super().reset(seed=seed, options=options)
@@ -115,16 +117,24 @@ class SimpleWalkerEnvClass(EvoGymBase):
     
     def get_obs(self) -> np.ndarray:
         """Get current observation"""
-        obs = np.concatenate((
+        raw_obs = np.concatenate((
             self.get_vel_com_obs("robot"),
             self.get_relative_pos_obs("robot"),
         ))
+
+        if raw_obs.shape[0] < self.FIXED_OBS_SIZE:
+            obs = np.pad(raw_obs, (0, self.FIXED_OBS_SIZE - raw_obs.shape[0]))
+        else:
+            obs = raw_obs[:self.FIXED_OBS_SIZE]
+
         return obs
 
-    def set_morphology(self, morph_idx: int):
+    
+    def set_morphology(self):
         """Switch to a different morphology"""
-        if morph_idx >= len(self.bodies) or morph_idx < 0:
-            raise ValueError(f"Morphology index {morph_idx} out of range [0, {len(self.bodies)-1}]")
+        morph_idx = random.randrange(0, len(self.bodies) - 1)
+
+        print(f'Morph idx shuffled to: {morph_idx}')
             
         if morph_idx != self.current_morph_idx:
             self.current_morph_idx = morph_idx
@@ -141,21 +151,10 @@ class SimpleWalkerEnvClass(EvoGymBase):
             self._sim = EvoSim(world)
             
             # Reset to initialize sim and get new sizes
-            try:
-                state = self.reset()
-                if state is None:
-                    state = self.get_obs()
-                
-                # Update spaces for new morphology
-                num_actuators = len(self.get_actuator_indices('robot'))
-                obs_size = state[0].shape[0] if isinstance(state, tuple) else state.shape[0]
-                
-                self.action_space = spaces.Box(low=0.6, high=1.6, shape=(num_actuators,), dtype=float)
-                self.observation_space = spaces.Box(low=-100.0, high=100.0, shape=(obs_size,), dtype=float)
-                self.action_space = spaces.Box(low=0.6, high=1.6, shape=(num_actuators,), dtype=float)
-                self.observation_space = spaces.Box(low=-100.0, high=100.0, shape=(obs_size,), dtype=float)
-            except Exception:
-                pass
+       
+            self.action_space = spaces.Box(low=0.6, high=1.6, shape=(self.FIXED_ACTION_SIZE,), dtype=float)
+            self.observation_space = spaces.Box(low=-100.0, high=100.0, shape=(self.FIXED_OBS_SIZE,), dtype=float)
+
             
     def get_num_morphologies(self) -> int:
         """Return the number of available morphologies"""
