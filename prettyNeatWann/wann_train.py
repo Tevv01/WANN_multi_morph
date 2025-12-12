@@ -23,6 +23,8 @@ from domain.make_env import generate_morphs
 
 morphologies, connections = generate_morphs(num_morphs=5, size=5)
 
+rng = np.random.default_rng(seed=578949853)
+
 # -- Run NEAT ------------------------------------------------------------ -- #
 def master(): 
   """Main NEAT optimization script
@@ -283,8 +285,3 @@ if __name__ == "__main__":
   if "parent" == mpi_fork(args.num_worker+1): os._exit(0)
 
   main(args)                              
-  
-
-
-
-
