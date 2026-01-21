@@ -77,12 +77,12 @@ def make_env(env_name, seed=-1, render_mode=False, morph = None, conn = None):
     if env_name == "ObstacleTraverser-v0":
       from domain.evogym_traverser import WalkingBumpy
       mor, c = sample_robot(5)
-      env = WalkingBumpy(body=mor, connections=c, render_mode='human')
+      env = WalkingBumpy(body=mor, connections=c, render_mode=None)
     
     if env_name == "ObstacleTraverser-v1":
       from domain.evogym_traverser import WalkingBumpy2
       mor, c = sample_robot((5,5))
-      env = WalkingBumpy2(body=mor, connections=c, render_mode='human')
+      env = WalkingBumpy2(body=mor, connections=c, render_mode=None)
 
 
   # -- Other  -------------------------------------------------------- -- #
