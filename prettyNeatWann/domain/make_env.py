@@ -17,8 +17,8 @@ def generate_morphs(num_morphs, size = 5):
 
 
 
-def make_env(env_name, seed=-1, render_mode=False):
-  evogym_envs = ["Walker-v0"]
+def make_env(env_name, seed=-1, render_mode=False, morph = None, conn = None):
+  evogym_envs = ["Walker-v0", "ObstacleTraverser-v1", "ObstacleTraverser-v0"]
 
   # -- Bipedal Walker ------------------------------------------------ -- #
   if (env_name.startswith("BipedalWalker")):
@@ -70,9 +70,19 @@ def make_env(env_name, seed=-1, render_mode=False):
   # -- EVOGYM WALKER ------------------------------------------------- -- #
   elif env_name in evogym_envs:
     if env_name == "Walker-v0":
-        morphologies, connections = generate_morphs(num_morphs=5, size=5)
+        morphologies, connections = generate_morphs(num_morphs=8, size=5)
         from domain.evogym_walker import SimpleWalkerEnvClass
         env = SimpleWalkerEnvClass(bodies=morphologies, connections=connections, render_mode=None)
+    
+    if env_name == "ObstacleTraverser-v0":
+      from domain.evogym_traverser import WalkingBumpy
+      mor, c = sample_robot(5)
+      env = WalkingBumpy(body=mor, connections=c, render_mode='human')
+    
+    if env_name == "ObstacleTraverser-v1":
+      from domain.evogym_traverser import WalkingBumpy2
+      mor, c = sample_robot((5,5))
+      env = WalkingBumpy2(body=mor, connections=c, render_mode='human')
 
 
   # -- Other  -------------------------------------------------------- -- #

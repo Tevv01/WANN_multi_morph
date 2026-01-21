@@ -39,7 +39,7 @@ class SimpleWalkerEnvClass(EvoGymBase):
         
         # Forced obs size so the network gets the right dims in
         self.FIXED_OBS_SIZE = 66
-        self.FIXED_ACTION_SIZE = 20
+        self.FIXED_ACTION_SIZE = 25
 
         # Create world template first
         world_json = os.path.join(os.path.dirname(__file__), 'world_data', 'simple_walker_env.json')

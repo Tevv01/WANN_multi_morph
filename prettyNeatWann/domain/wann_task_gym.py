@@ -5,7 +5,9 @@ from domain.make_env import make_env
 from domain.task_gym import GymTask
 from neat_src import *
 from domain.evogym_walker import SimpleWalkerEnvClass
+from domain.evogym_traverser import WalkingBumpy, StairsBaseNew, WalkingBumpy2
 from evogym.envs import EvoGymBase
+from evogym.envs.traverse import StairsBase
 from domain.make_env import generate_morphs
 
 
@@ -95,7 +97,12 @@ class WannGymTask(GymTask):
     for iRep in range(nRep):
 
       try:
-        if issubclass(type(self.env), EvoGymBase):
+        if issubclass(type(self.env), StairsBaseNew):
+          morph_idx = random.randint(0, len(self.morphologies) - 1)
+          print(f"Switching to morph_idx: {morph_idx}")
+          self.env = WalkingBumpy2(body=self.morphologies[morph_idx], connections=self.connections[morph_idx], render_mode="human")
+        
+        elif issubclass(type(self.env), EvoGymBase):
           morph_idx = random.randint(0, len(self.morphologies) - 1)
           print(f"Switching to morph_idx: {morph_idx}")
           self.env = SimpleWalkerEnvClass(body=self.morphologies[morph_idx], connections=self.connections[morph_idx], render_mode=None)

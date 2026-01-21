@@ -182,8 +182,8 @@ games['bullet_ant'] = bullet_ant
 
 evogym_walker = Game(env_name="Walker-v0",
   actionSelect='all', # all, soft, hard
-  input_size=100,
-  output_size=20,  # Maximum number of possible actuators
+  input_size=52,
+  output_size=25,  # Maximum number of possible actuators
   time_factor=0,
   layers=[],
   i_act=np.full(74,1),
@@ -196,3 +196,39 @@ evogym_walker = Game(env_name="Walker-v0",
   in_out_labels = [])
 
 games['evogym_walker'] = evogym_walker
+
+
+evogym_obstacle_trav1 = Game(env_name="ObstacleTraverser-v0",
+  actionSelect='all', # all, soft, hard
+  input_size=64,
+  output_size=25,  # Maximum number of possible actuators
+  time_factor=0,
+  layers=[],
+  i_act=np.full(74,1),
+  h_act=[1,2,3,4,5,6,7,8,9,10],
+  o_act=np.full(10,1),  # Activation functions for all possible outputs
+  weightCap = 2.0,
+  noise_bias=0.0,
+  max_episode_length = 500,
+  output_noise=[False] * 10,  # Noise settings for all possible outputs
+  in_out_labels = [])
+
+games['evogym_obstacle_trav1'] = evogym_obstacle_trav1
+
+
+evogym_obstacle_trav2 = Game(env_name="ObstacleTraverser-v1",
+  actionSelect='all', # all, soft, hard
+  input_size=80,
+  output_size=25,  # Maximum number of possible actuators
+  time_factor=0,
+  layers=[],
+  i_act=np.full(74,1),
+  h_act=[1,2,3,4,5,6,7,8,9,10],
+  o_act=np.full(10,1),  # Activation functions for all possible outputs
+  weightCap = 2.0,
+  noise_bias=0.0,
+  max_episode_length = 500,
+  output_noise=[False] * 10,  # Noise settings for all possible outputs
+  in_out_labels = [])
+
+games['evogym_obstacle_trav2'] = evogym_obstacle_trav2
