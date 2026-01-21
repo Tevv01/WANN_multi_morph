@@ -21,9 +21,9 @@ from domain.evogym_walker import SimpleWalkerEnvClass
 import gymnasium as gym
 from domain.make_env import generate_morphs
 
-morphologies, connections = generate_morphs(num_morphs=5, size=5)
+morphologies, connections = generate_morphs(num_morphs=1, size=5)
 
-rng = np.random.default_rng(seed=578949853)
+np.random.seed(4382904)
 
 # -- Run NEAT ------------------------------------------------------------ -- #
 def master(): 
@@ -284,4 +284,10 @@ if __name__ == "__main__":
   # Use MPI if parallel
   if "parent" == mpi_fork(args.num_worker+1): os._exit(0)
 
-  main(args)                              
+  main(args)
+
+  print(time.time())                          
+
+
+# RUN COMMAND (STANDARD)
+# python wann_train.py -n 12 -o pilot

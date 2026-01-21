@@ -91,9 +91,6 @@ class GymTask():
     Returns:
       fitness - (float)    - reward earned in trial
     """
-
-    random.seed(seed)
-    np.random.seed(seed)
     
     ## Vetle - Handling TypeError to allow for newer gym-tasks (where seed is given on reset), and older, where seed is set seperate.
     try:

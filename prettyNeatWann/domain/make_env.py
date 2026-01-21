@@ -70,7 +70,7 @@ def make_env(env_name, seed=-1, render_mode=False):
   # -- EVOGYM WALKER ------------------------------------------------- -- #
   elif env_name in evogym_envs:
     if env_name == "Walker-v0":
-        morphologies, connections = generate_morphs(num_morphs=5, size=5)
+        morphologies, connections = generate_morphs(num_morphs=8, size=5)
         from domain.evogym_walker import SimpleWalkerEnvClass
         env = SimpleWalkerEnvClass(bodies=morphologies, connections=connections, render_mode=None)
 
