@@ -100,7 +100,7 @@ class WannGymTask(GymTask):
         if issubclass(type(self.env), StairsBaseNew):
           morph_idx = random.randint(0, len(self.morphologies) - 1)
           print(f"Switching to morph_idx: {morph_idx}")
-          self.env = WalkingBumpy2(body=self.morphologies[morph_idx], connections=self.connections[morph_idx], render_mode="human")
+          self.env = WalkingBumpy2(body=self.morphologies[morph_idx], connections=self.connections[morph_idx], render_mode=None)
         
         elif issubclass(type(self.env), EvoGymBase):
           morph_idx = random.randint(0, len(self.morphologies) - 1)
