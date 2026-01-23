@@ -64,8 +64,9 @@ class SimpleWalkerEnvClass(EvoGymBase):
 
         # Handle case where network outputs more actions than actuators
         num_actuators = self.get_actuator_indices('robot').size
-        action = action[:num_actuators]  # Only use the first N actions where N is number of actuators
+        raw_action = action[:num_actuators]  # Only use the first N actions where N is number of actuators
 
+        action = np.clip(raw_action, 0.6, 1.6)
 
         # collect pre step information
         pos_1 = self.object_pos_at_time(self.get_time(), "robot")
