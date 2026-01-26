@@ -200,7 +200,7 @@ games['evogym_walker'] = evogym_walker
 
 evogym_obstacle_trav1 = Game(env_name="ObstacleTraverser-v0",
   actionSelect='all', # all, soft, hard
-  input_size=64,
+  input_size=52,
   output_size=25,  # Maximum number of possible actuators
   time_factor=0,
   layers=[],
@@ -218,7 +218,7 @@ games['evogym_obstacle_trav1'] = evogym_obstacle_trav1
 
 evogym_obstacle_trav2 = Game(env_name="ObstacleTraverser-v1",
   actionSelect='all', # all, soft, hard
-  input_size=80,
+  input_size=64,
   output_size=25,  # Maximum number of possible actuators
   time_factor=0,
   layers=[],
