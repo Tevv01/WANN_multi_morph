@@ -38,7 +38,7 @@ class SimpleWalkerEnvClass(EvoGymBase):
         self._render_options = render_options
         
         # Forced obs size so the network gets the right dims in
-        self.FIXED_OBS_SIZE = 66
+        self.FIXED_OBS_SIZE = 52
         self.FIXED_ACTION_SIZE = 25
 
         # Create world template first

@@ -27,7 +27,7 @@ class StairsBaseNew(BenchmarkBase):
 
         super().__init__(world=world, render_mode=render_mode, render_options=render_options)
         # Forced obs size so the network gets the right dims in
-        self.FIXED_OBS_SIZE = 80
+        self.FIXED_OBS_SIZE = 64
         self.FIXED_ACTION_SIZE = 25
 
     def get_reward(self, robot_pos_init, robot_pos_final):
