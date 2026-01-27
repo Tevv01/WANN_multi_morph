@@ -1,7 +1,7 @@
 {
     "task":"evogym_obstacle_trav2",
-    "alg_nReps": 3,
-    "maxGen": 1024,
+    "alg_nReps": 2,
+    "maxGen": 648,
     "popSize": 84,
     "prob_initEnable": 0.25,
     "select_tournSize": 16,
