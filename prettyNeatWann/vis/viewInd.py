@@ -112,7 +112,7 @@ def labelInOut(pos, env):
     stateLabels = ['bias'] + env.in_out_labels
     labelDict = {}
   for i in range(len(stateLabels)):
-        labelDict[fixed_nodes[i]] = stateLabels[i]
+    labelDict[fixed_nodes[i]] = stateLabels[i]
       
   for i in range(nIn):
     plt.annotate(labelDict[i], xy=(pos[i][0]-0.5, pos[i][1]), xytext=(pos[i][0]-2.5, pos[i][1]-0.5),\

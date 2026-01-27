@@ -1,10 +1,10 @@
 {
     "task":"evogym_obstacle_trav2",
-    "alg_nReps": 3,
-    "maxGen": 1024,
-    "popSize": 84,
+    "alg_nReps": 1,
+    "maxGen": 416,
+    "popSize": 128,
     "prob_initEnable": 0.25,
-    "select_tournSize": 16,
+    "select_tournSize": 12,
     "save_mod": 10,
     "bestReps": 2
 }

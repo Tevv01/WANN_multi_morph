@@ -193,7 +193,8 @@ evogym_walker = Game(env_name="Walker-v0",
   noise_bias=0.0,
   max_episode_length = 500,
   output_noise=[False] * 10,  # Noise settings for all possible outputs
-  in_out_labels = [])
+  in_out_labels = ([f"obs_{i}" for i in range(1, 52 + 1)] +
+                  [f"act_{i}" for i in range(1, 25 + 1)]))
 
 games['evogym_walker'] = evogym_walker
 
@@ -211,7 +212,7 @@ evogym_obstacle_trav1 = Game(env_name="ObstacleTraverser-v0",
   noise_bias=0.0,
   max_episode_length = 500,
   output_noise=[False] * 10,  # Noise settings for all possible outputs
-  in_out_labels = [])
+  in_out_labels = ["act", "obs"])
 
 games['evogym_obstacle_trav1'] = evogym_obstacle_trav1
 
@@ -229,6 +230,6 @@ evogym_obstacle_trav2 = Game(env_name="ObstacleTraverser-v1",
   noise_bias=0.0,
   max_episode_length = 500,
   output_noise=[False] * 10,  # Noise settings for all possible outputs
-  in_out_labels = [])
+  in_out_labels = ["act", "obs"])
 
 games['evogym_obstacle_trav2'] = evogym_obstacle_trav2
