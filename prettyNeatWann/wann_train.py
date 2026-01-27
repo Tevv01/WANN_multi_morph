@@ -6,6 +6,9 @@ import argparse
 import subprocess
 import numpy as np
 
+# SEEDS TO USE PER EXP: 4382904, 328932, 9689, 34902, 43920
+np.random.seed(4382904)
+
 np.set_printoptions(precision=2, linewidth=160) 
 
 # MPI
@@ -21,9 +24,8 @@ from domain.evogym_walker import SimpleWalkerEnvClass
 import gymnasium as gym
 from domain.make_env import generate_morphs
 
-morphologies, connections = generate_morphs(num_morphs=18, size=5)
 
-np.random.seed(4382904)
+morphologies, connections = generate_morphs(num_morphs=1, size=5)
 
 # -- Run NEAT ------------------------------------------------------------ -- #
 def master(): 
@@ -270,7 +272,7 @@ if __name__ == "__main__":
    help='default hyperparameter file', default='p/default_wann.json')
 
   parser.add_argument('-p', '--hyperparam', type=str,\
-   help='hyperparameter file', default='p/default_evogym_obst.json')
+   help='hyperparameter file', default='p/default_evogym_walker.json')
 
   parser.add_argument('-o', '--outPrefix', type=str,\
    help='file name for result output', default='test')

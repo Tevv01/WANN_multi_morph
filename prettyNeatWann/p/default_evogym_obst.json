@@ -5,6 +5,6 @@
     "popSize": 128,
     "prob_initEnable": 0.25,
     "select_tournSize": 12,
-    "save_mod": 10,
+    "save_mod": 8,
     "bestReps": 2
 }
